@@ -1,0 +1,31 @@
+## Title: Teleporter
+
+## Author: @awesomebilly
+## APIVersion: 100010
+## SavedVariables: Teleporter_SV
+## Version: 3.61
+## OptionalDependsOn:  LibAnimation-1.0, LibStub, TeleUnicorn, List, LibAddonMenu-1.0
+
+libs/LibStub.lua
+libs/LibAnimation.lua
+libs/LibAddonMenu-1.0.lua
+
+
+TeleporterGlobals.lua
+
+core/SI.lua
+localization/$(language).lua
+
+libs/TeleUnicorn.lua
+libs/List.lua
+
+core/TeleAppUI.lua
+core/TeleCommons.lua
+core/TeleDebug.lua
+core/TeleSlashCommands.lua
+TeleporterChecker.lua
+Teleporter.xml
+Teleporter.lua
+
+
+

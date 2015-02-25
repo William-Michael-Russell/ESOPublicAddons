@@ -1,0 +1,12 @@
+<GuiXml>
+    <Controls>
+        <TopLevelControl name="Luminary_Teleporter_Controller"
+                         mouseEnabled="true" movable="true">
+
+            <OnUpdate>
+                TeleporterOnUpdate()
+            </OnUpdate>
+
+        </TopLevelControl>
+    </Controls>
+</GuiXml>

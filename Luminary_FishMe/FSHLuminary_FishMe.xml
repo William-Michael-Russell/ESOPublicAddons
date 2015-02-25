@@ -1,0 +1,10 @@
+<GuiXml>
+	<Controls>
+		<TopLevelControl name="LuminaryGuildHelper" mouseEnabled="true" movable="true">
+
+			  <OnUpdate>
+                FishMeUpdate()
+            </OnUpdate>
+		</TopLevelControl>
+	</Controls>
+</GuiXml>

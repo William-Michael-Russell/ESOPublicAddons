@@ -1,0 +1,34 @@
+## Title: Luminary_FishMe
+## APIVersion: 100009
+## SavedVariables: GuildExport_SV
+## Version: 3.15
+## OptionalDependsOn: LibAddonMenu-1.0, LibAnimation-1.0, LibStub
+
+FSHLuminary_FishMeGlobals.lua
+core/SI.lua
+localization/$(language).lua
+
+lib/LibStub.lua
+lib/LibAnimation.lua
+lib/LibAddonMenu-1.0.lua
+
+
+
+
+core/logging/FSHLogging.lua
+
+core/FSHCommons.lua
+
+
+
+core/FSHUI.lua
+FSHLuminary_FishMe.lua
+test/TestMethods.lua
+core/FSHSlashCommands.lua
+
+
+core/FSHLoadAddon.lua
+
+
+FSHLuminary_FishMe.xml
+

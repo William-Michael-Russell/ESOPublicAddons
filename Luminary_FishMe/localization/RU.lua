@@ -1,0 +1,22 @@
+--local mkstr = ZO_CreateStringId
+--local SI = LUMTH.SI
+--
+---- texts
+--mkstr(SI.CLOSE,          "CLOSE11")
+--mkstr(SI.BUYER,          "CLOSE11")
+--mkstr(SI.GUILD,          "CLOSE11")
+--mkstr(SI.ITEMNAME,          "CLOSE11")
+--mkstr(SI.TIMESOLD,          "CLOSE11")
+--mkstr(SI.PRICE,          "CLOSE11")
+--mkstr(SI.REFRESH,          "CLOSE11")
+--mkstr(SI.TIMEDESC,          "CLOSE11")
+--mkstr(SI.TIMEASC,          "CLOSE11")
+--mkstr(SI.PRICEDESC,          "CLOSE11")
+--mkstr(SI.PRICEASC,          "CLOSE11")
+--mkstr(SI.REFRESHINGSALES,          "CLOSE11")
+--mkstr(SI.TOTALRECORDEDHISTORY,          "CLOSE11")
+--mkstr(SI.LUMINARYTRADEHOUSE,          "CLOSE11")
+--mkstr(SI.CLOSE,          "CLOSE11")
+
+
+--- Do they have Russian?
