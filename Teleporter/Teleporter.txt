@@ -1,14 +1,27 @@
 ## Title: Teleporter
 
 ## Author: @awesomebilly
-## APIVersion: 100010
+## APIVersion: 100011
 ## SavedVariables: Teleporter_SV
-## Version: 3.61
-## OptionalDependsOn:  LibAnimation-1.0, LibStub, TeleUnicorn, List, LibAddonMenu-1.0
+## Version: 3.8
+## OptionalDependsOn:  LibAnimation-1.0, LibStub, TeleUnicorn, List, LibAddonMenu-2.0
 
 libs/LibStub.lua
 libs/LibAnimation.lua
-libs/LibAddonMenu-1.0.lua
+
+libs\LibAddonMenu-2.0\LibAddonMenu-2.0.lua
+libs\LibAddonMenu-2.0\controls\panel.lua
+libs\LibAddonMenu-2.0\controls\submenu.lua
+libs\LibAddonMenu-2.0\controls\button.lua
+libs\LibAddonMenu-2.0\controls\checkbox.lua
+libs\LibAddonMenu-2.0\controls\colorpicker.lua
+libs\LibAddonMenu-2.0\controls\custom.lua
+libs\LibAddonMenu-2.0\controls\description.lua
+libs\LibAddonMenu-2.0\controls\dropdown.lua
+libs\LibAddonMenu-2.0\controls\editbox.lua
+libs\LibAddonMenu-2.0\controls\header.lua
+libs\LibAddonMenu-2.0\controls\slider.lua
+libs\LibAddonMenu-2.0\controls\texture.lua
 
 
 TeleporterGlobals.lua
