@@ -1,51 +1,93 @@
-local LAM = LibStub( 'LibAddonMenu-1.0' )
-if ( not LAM ) then return end
---if ( not LAM ) then return end   -- LibAddon Library
+local LAM2 = LibStub("LibAddonMenu-2.0")
+if ( not LAM2 ) then return end
+
 local SI = Teleporter.SI ---- used for localization
 
 
 local function SetupOptionsMenu(index)
-  local optionsPanel = LAM:CreateControlPanel(Teleporter.var.appName.. index.. "ControlPanel", Teleporter.var.color.colArtifact .."Luminary" .. Teleporter.var.color.colTeal.." Teleporter")
-  if optionsPanel ~= nil then
-    LAM:AddHeader(optionsPanel, Teleporter.var.appName.. "Header" .. index,  "Teleporter Options")
+  local panelData = {
+    type = "panel",
+    name = Teleporter.var.color.colArtifact.."Luminary"..Teleporter.var.color.colTeal.." Teleporter",
+    displayName = Teleporter.var.color.colArtifact.."Luminary"..Teleporter.var.color.colTeal.." Teleporter",
+    author = "awesomebilly - maintainer kerb9729",
+    version = "3.8",
+    slashCommand = "/teleporter",
+    registerForRefresh = true,
+    registerForDefaults = true,
+  }
 
+  local optionsData = {
+    [1] = {
+      type = "header",
+      name = "Teleporter Options",
+      width = "full",
+      reference = Teleporter.var.appName.. "Header" .. index,
+      },
+    [2] = {
+      type = "editbox",
+      name = SI.get(SI.TELE_SET_PORTAL_FREQ),
+      tooltip = SI.get(SI.TELE_SET_PORTAL_FREQ_INFO),
+      getFunc = function () return mTeleSavedVars.AutoPortFreq end,
+      setFunc = function(secs)mTeleSavedVars.AutoPortFreq = tonumber(secs) end,
+      isMultiline = false,
+      width = "full",
+      default = function () return mTeleSavedVars.AutoPortFreq end,
+      reference = "HowFrequentlyShouldIPortal",
+      },
+    [3] = {
+      type = "checkbox",
+      name = "Enable Verbose Logging?",
+      tooltip = "This will Spam your client with developer logs",
+      getFunc = function() return mTeleSavedVars.logV end,
+      setFunc = function(val) mTeleSavedVars.logV = val end,
+      width = "full",
+      default = mTeleSavedVars.logV,
+      reference = Teleporter.var.appName.. index.. "EnableVerboseLogging",
+      },
+    [4] = {
+      type = "checkbox",
+      name = "Enable Debug Logging?",
+      tooltip = "This will inform you with debug logs",
+      getFunc = function() return mTeleSavedVars.logD end,
+      setFunc = function(val) mTeleSavedVars.logD = val end,
+      width = "full",
+      default = mTeleSavedVars.logD,
+      reference = Teleporter.var.appName..index..  "EnableDebugLogging",
+      },
+    [5] = {
+      type = "checkbox",
+      name = "Enable Error Logging?",
+      tooltip = "This will inform you with error logs",
+      getFunc = function() return mTeleSavedVars.logE end,
+      setFunc = function(val) mTeleSavedVars.logE = val end,
+      width = "full",
+      default = mTeleSavedVars.logE,
+      reference = Teleporter.var.appName..index..  "EnableErrorLogging",
+      },
+    [6] = {
+      type = "checkbox",
+      name = "Do not show level 50s",
+      tooltip = "This is for low level players to filter out 'vet' portal issues",
+      getFunc = function() return mTeleSavedVars.FilterCloserToLevel end,
+      setFunc = function(val) mTeleSavedVars.FilterCloserToLevel = val end,
+      width = "full",
+      default = mTeleSavedVars.FilterCloserToLevel,
+      reference = Teleporter.var.appName..index..  "EnableCloserLoggingByLevel",
+      },
+    [7] = {
+      type = "checkbox",
+      name = "Open teleporter with map",
+      tooltip = "When you open the map teleporter will automatically open as well, otherwise you'll get a button on the map.",
+      getFunc = function() return    mTeleSavedVars.AutoOpenMap end,
+      setFunc = function(val)    mTeleSavedVars.AutoOpenMap = val end,
+      width = "full",
+      default =    mTeleSavedVars.AutoOpenMap,
+      reference = Teleporter.var.appName..index..  "OpenTheMapByDefault",
+      },
+  }
+  LAM2:RegisterAddonPanel(Teleporter.var.appName..index.."ControlPanel", panelData)
+  LAM2:RegisterOptionControls(Teleporter.var.appName..index.."ControlPanel", optionsData)
 
-    LAM:AddEditBox(optionsPanel, "HowFrequentlyShouldIPortal", SI.get(SI.TELE_SET_PORTAL_FREQ),
-        SI.get(SI.TELE_SET_PORTAL_FREQ_INFO), false,
-        function () return mTeleSavedVars.AutoPortFreq end,
-        function(secs)mTeleSavedVars.AutoPortFreq = tonumber(secs) end )
-
-
-    LAM:AddCheckbox(optionsPanel, Teleporter.var.appName.. index.. "EnableVerboseLogging", "Enable Verbose Logging?", "This will Spam your client with developer logs",
-      function() return mTeleSavedVars.logV end,
-      function(val) mTeleSavedVars.logV = val
-      end)
-
-    LAM:AddCheckbox(optionsPanel, Teleporter.var.appName..index..  "EnableDebugLogging", "Enable Debug Logging?", "This will inform you with debug logs",
-      function() return mTeleSavedVars.logD end,
-      function(val) mTeleSavedVars.logD = val
-      end)
-
-    LAM:AddCheckbox(optionsPanel, Teleporter.var.appName..index..  "EnableErrorLogging", "Enable Error Logging?", "This will inform you with error logs",
-      function() return mTeleSavedVars.logE end,
-      function(val) mTeleSavedVars.logE = val
-      end)
-
-
-    LAM:AddCheckbox(optionsPanel, Teleporter.var.appName..index..  "EnableCloserLoggingByLevel", "Do not show level 50s", "This is for low level players to filter out 'vet' portal issues",
-        function() return mTeleSavedVars.FilterCloserToLevel end,
-        function(val) mTeleSavedVars.FilterCloserToLevel = val
-        end)
-
-
-    LAM:AddCheckbox(optionsPanel, Teleporter.var.appName..index..  "OpenTheMapByDefault", "Open teleporter with map", "When you open the map teleporter will automatically open as well, otherwise you'll get a button on the map.",
-        function() return    mTeleSavedVars.AutoOpenMap end,
-        function(val)    mTeleSavedVars.AutoOpenMap = val
-        end)
-
-
-
-  end
 end
 
 local function SetupUI()
