@@ -1,34 +1,41 @@
-## Title: Luminary_FishMe
-## APIVersion: 100009
-## SavedVariables: GuildExport_SV
-## Version: 3.15
-## OptionalDependsOn: LibAddonMenu-1.0, LibAnimation-1.0, LibStub
-
-FSHLuminary_FishMeGlobals.lua
-core/SI.lua
-localization/$(language).lua
+## Title: |c912be1Luminary |c2dc50eFishMe|r
+## Version: 3.16
+## Author: awesomebilly
+## APIVersion: 100011
+## SavedVariables: Luminary_FishMe_SV
+## OptionalDependsOn: LibAddonMenu-2.0
 
 lib/LibStub.lua
-lib/LibAnimation.lua
-lib/LibAddonMenu-1.0.lua
+lib/LibAddonMenu-2.0.lua
+lib/controls/panel.lua
+lib/controls/submenu.lua
+lib/controls/button.lua
+lib/controls/checkbox.lua
+lib/controls/colorpicker.lua
+lib/controls/custom.lua
+lib/controls/description.lua
+lib/controls/dropdown.lua
+lib/controls/editbox.lua
+lib/controls/header.lua
+lib/controls/slider.lua
+lib/controls/texture.lua
+
+
+Globals.lua
+SI.lua
+localization/$(language).lua
+
+FishMe.lua
 
 
 
-
-core/logging/FSHLogging.lua
-
-core/FSHCommons.lua
-
-
-
-core/FSHUI.lua
-FSHLuminary_FishMe.lua
-test/TestMethods.lua
-core/FSHSlashCommands.lua
-
-
-core/FSHLoadAddon.lua
-
-
-FSHLuminary_FishMe.xml
-
+; DISCLAIMER:
+; This Add-on is not created by, affiliated with or sponsored by ZeniMax
+; Media Inc. or its affiliates. The Elder Scrolls® and related logos are
+; registered trademarks or trademarks of ZeniMax Media Inc. in the United
+; States and/or other countries. All rights reserved.
+;
+; You can read the full terms at:
+; https://account.elderscrollsonline.com/add-on-terms
+;
+;'--Special thanks to Garkin for keeping this alive!
