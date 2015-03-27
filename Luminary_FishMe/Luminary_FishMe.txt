@@ -1,5 +1,5 @@
 ## Title: |c912be1Luminary |c2dc50eFishMe|r
-## Version: 3.16
+## Version: 1.6.5.0
 ## Author: awesomebilly
 ## APIVersion: 100011
 ## SavedVariables: Luminary_FishMe_SV
