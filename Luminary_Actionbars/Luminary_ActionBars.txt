@@ -1,0 +1,24 @@
+## Title: Luminary_ActionBars
+## Author: @awesomebilly
+## APIVersion: 100011
+## Version: 1.6.5.0
+## SavedVariables: Luminary_ActionBars_SV
+## OptionalDependsOn:  libStub, libAddonMenu-2.0
+
+libs/libStub.lua
+libs/libAddonMenu-2.0.lua
+libs/controls/panel.lua
+libs/controls/submenu.lua
+libs/controls/button.lua
+libs/controls/checkbox.lua
+libs/controls/colorpicker.lua
+libs/controls/custom.lua
+libs/controls/description.lua
+libs/controls/dropdown.lua
+libs/controls/editbox.lua
+libs/controls/header.lua
+libs/controls/slider.lua
+libs/controls/texture.lua
+
+Luminary_ActionBars.lua
+Luminary_ActionBarsUI.lua
