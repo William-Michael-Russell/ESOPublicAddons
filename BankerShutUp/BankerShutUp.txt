@@ -3,8 +3,8 @@
 ## Author: @awesomebilly
 ## APIVersion: 100011
 ## SavedVariables: Luminary_BankerShutup_SV
-## Version: 3.5c
-## OptionalDependsOn: LibStub-1.0 LibAddonMenu-2.0 LibAddonMenu-1.0-to-2.0
+## Version: 1.6.5.0
+## OptionalDependsOn: LibStub LibAddonMenu-2.0
 
 libs/LibStub.lua
 libs/LibAddonMenu-2.0/LibAddonMenu-2.0.lua

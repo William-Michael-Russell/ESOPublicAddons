@@ -1,12 +1,11 @@
 BankerShutUp
 
 =========
-
-What does this app do?
-----------------
+What this app does:
 
 Shut the stupid bankers up!
 Also quite down crafting tables
+Or completely mute the game when talking to a NPC or opening a crafting table
 
 
 How does it work?

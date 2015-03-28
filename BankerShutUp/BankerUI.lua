@@ -155,7 +155,7 @@ function BankerShutUp.SetupOptionsMenu(index)
 
         [14] = {
             type = "checkbox",
-            name = "Hardcore shutup",
+            name = BankerShutUp.var.color.colRed .. "Hardcore shutup",
             tooltip = "This will mute all sound... might expand features on this.",
             getFunc = function() return mBankerShutUpSV.hardCoreShutUp end,
             setFunc = function(value) mBankerShutUpSV.hardCoreShutUp = value end,
@@ -181,34 +181,34 @@ function BankerShutUp.SetupOptionsMenu(index)
             text = "How much should we mute the volumes?" .. BankerShutUp.var.color.colRed .. "\nExample: Down will mute when vendor is open. \nUp will restore to the volume you want.",
             warning = "test",
         },
+--        [17] = {
+--            type = "slider",
+--            name = "MasterVolume Down",
+--            tooltip = SI.get(SI.HOWMUCHTOMUTEVOLUME_INFO),
+--            min = 0,
+--            max = 100,
+--            step = 1, --(optional)
+--            getFunc = function() return mBankerShutUpSV.MasterVolumeMute end,
+--            setFunc = function(value) mBankerShutUpSV.MasterVolumeMute = value end,
+--            width = "half", --or "half" (optional)
+--            default = 0, --(optional)
+--        },
+--        [18] = {
+--            type = "slider",
+--            name = "MasterVolume Up",
+--            tooltip = SI.get(SI.HOWMUCHTORETURNVOLUME_INFO),
+--            min = 0,
+--            max = 100,
+--            step = 1, --(optional)
+--            getFunc = function() return mBankerShutUpSV.MasterVolume end,
+--            setFunc = function(value) mBankerShutUpSV.MasterVolume = value end,
+--            width = "half", --or "half" (optional)
+--            default = 80, --(optional)
+--        },
+
+
+
         [17] = {
-            type = "slider",
-            name = "MasterVolume Down",
-            tooltip = SI.get(SI.HOWMUCHTOMUTEVOLUME_INFO),
-            min = 0,
-            max = 100,
-            step = 1, --(optional)
-            getFunc = function() return mBankerShutUpSV.MasterVolumeMute end,
-            setFunc = function(value) mBankerShutUpSV.MasterVolumeMute = value end,
-            width = "half", --or "half" (optional)
-            default = 0, --(optional)
-        },
-        [18] = {
-            type = "slider",
-            name = "MasterVolume Up",
-            tooltip = SI.get(SI.HOWMUCHTORETURNVOLUME_INFO),
-            min = 0,
-            max = 100,
-            step = 1, --(optional)
-            getFunc = function() return mBankerShutUpSV.MasterVolume end,
-            setFunc = function(value) mBankerShutUpSV.MasterVolume = value end,
-            width = "half", --or "half" (optional)
-            default = 80, --(optional)
-        },
-
-
-
-        [19] = {
             type = "submenu",
             name = "Volume Controls",
             tooltip = "Control the mute and unmute volume settings.", --(optional)
