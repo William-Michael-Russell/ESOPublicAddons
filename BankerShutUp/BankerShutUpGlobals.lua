@@ -5,7 +5,7 @@ BankerShutUp.win =   {
 }
 BankerShutUp.var = {
   appName               = "BankerShutUp",
-  Version        =  3.2,
+  Version        =  '3.2c',
   controls               = {},
   isAddonLoaded         = false,
   color                 = {

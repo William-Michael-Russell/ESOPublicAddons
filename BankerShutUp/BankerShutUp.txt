@@ -1,26 +1,29 @@
 ## Title: BankerShutUp
 
 ## Author: @awesomebilly
-## APIVersion: 100010
+## APIVersion: 100011
 ## SavedVariables: Luminary_BankerShutup_SV
-## Version: 3.5b
+## Version: 3.5c
+## OptionalDependsOn: LibStub-1.0 LibAddonMenu-2.0 LibAddonMenu-1.0-to-2.0
 
-
-BankerShutUp/lib/LibStub.lua
-BankerShutUp/lib/LibAddonMenu-1.0.lua
+libs/LibStub.lua
+libs/LibAddonMenu-2.0/LibAddonMenu-2.0.lua
+libs/LibAddonMenu-2.0/controls/panel.lua
+libs/LibAddonMenu-2.0/controls/submenu.lua
+libs/LibAddonMenu-2.0/controls/button.lua
+libs/LibAddonMenu-2.0/controls/checkbox.lua
+libs/LibAddonMenu-2.0/controls/colorpicker.lua
+libs/LibAddonMenu-2.0/controls/custom.lua
+libs/LibAddonMenu-2.0/controls/description.lua
+libs/LibAddonMenu-2.0/controls/dropdown.lua
+libs/LibAddonMenu-2.0/controls/editbox.lua
+libs/LibAddonMenu-2.0/controls/header.lua
+libs/LibAddonMenu-2.0/controls/slider.lua
+libs/LibAddonMenu-2.0/controls/texture.lua
 
 BankerShutUpGlobals.lua
-
-
-
-
-BankerShutUp/lib/SI.lua
-BankerShutUp/localization/$(language).lua
-
-BankerShutUp/BankerShutUpCommons.lua
-BankerShutUp/BankerUI.lua
-
+libs/SI.lua
+localization/$(language).lua
+BankerShutUpCommons.lua
+BankerUI.lua
 BankerShutUp.lua
-BankerShutUp.xml
-
-

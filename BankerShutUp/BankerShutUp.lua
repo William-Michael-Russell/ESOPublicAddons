@@ -2,21 +2,23 @@ local SI = BankerShutUp.SI
 local npcTable = {}
 
 function BankerShutUp.alertBankerLoaded()
-    d(BankerShutUp.var.color.colArtifact .. "Luminary " .. BankerShutUp.var.color.colArcane .. "Banker Shutup loaded" .. " v" ..BankerShutUp.var.Version)
     EVENT_MANAGER:UnregisterForEvent(BankerShutUp.var.appName, EVENT_PLAYER_ACTIVATED)
 end
 
 
 function BankerShutUp.ShutUpQuick()
-
     if mBankerShutUpSV.OnlyTheBanker then
         SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_VO_VOLUME, mBankerShutUpSV.VolumeControlToMute)
+
+    elseif mBankerShutUpSV.hardCoreShutUp then
+        SetSetting(SETTING_TYPE_AUDIO, 0, 0)
     else
         SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_AMBIENT_VOLUME, mBankerShutUpSV.AmbienceMute)
-		SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_SFX_VOLUME, mBankerShutUpSV.EffectsMute)
-		SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_FOOTSTEPS_VOLUME, mBankerShutUpSV.FootstepsMute)
-		SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_VO_VOLUME, mBankerShutUpSV.DialogueMute)
-		SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_UI_VOLUME, mBankerShutUpSV.InterfaceMute)
+        SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_SFX_VOLUME, mBankerShutUpSV.EffectsMute)
+        SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_FOOTSTEPS_VOLUME, mBankerShutUpSV.FootstepsMute)
+        SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_VO_VOLUME, mBankerShutUpSV.DialogueMute)
+        SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_UI_VOLUME, mBankerShutUpSV.InterfaceMute)
+        -- SetSetting(SETTING_TYPE_AUDIO, 0, 50)
     end
 end
 
@@ -34,11 +36,11 @@ end
 
 
 function BankerShutUp:ManualSoundShutup()
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_AMBIENT_VOLUME, mBankerShutUpSV.AmbienceMute)
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_SFX_VOLUME, mBankerShutUpSV.EffectsMute)
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_FOOTSTEPS_VOLUME, mBankerShutUpSV.FootstepsMute)
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_VO_VOLUME, mBankerShutUpSV.DialogueMute)
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_UI_VOLUME, mBankerShutUpSV.InterfaceMute)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_AMBIENT_VOLUME, mBankerShutUpSV.AmbienceMute)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_SFX_VOLUME, mBankerShutUpSV.EffectsMute)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_FOOTSTEPS_VOLUME, mBankerShutUpSV.FootstepsMute)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_VO_VOLUME, mBankerShutUpSV.DialogueMute)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_UI_VOLUME, mBankerShutUpSV.InterfaceMute)
 end
 
 function BankerShutUp:manualShutUp()
@@ -47,16 +49,14 @@ function BankerShutUp:manualShutUp()
     npcTable = {}
     e.stringAction, e.name, e.interactBlocked, e.additionalInfo, e.contextualInfo = GetGameCameraInteractableActionInfo()
     table.insert(npcTable, e)
-    for k,v in ipairs (npcTable) do --mBankerShutUpSV.ShutupTable[k] = v.name
-            if mBankerShutUpSV.ShutupTable.name ~= v.name then
-                table.insert(mBankerShutUpSV.ShutupTable, v.name)
-                BankerShutUp.win.BankerShutUpUnMuter:SetHidden(false)
-                BankerShutUp.win.BankerShutUpMuter:SetHidden(true)
-                BankerShutUp:ManualSoundShutup()
+    for k, v in ipairs(npcTable) do --mBankerShutUpSV.ShutupTable[k] = v.name
+        if mBankerShutUpSV.ShutupTable.name ~= v.name then
+            table.insert(mBankerShutUpSV.ShutupTable, v.name)
+            BankerShutUp.win.BankerShutUpUnMuter:SetHidden(false)
+            BankerShutUp.win.BankerShutUpMuter:SetHidden(true)
+            BankerShutUp:ManualSoundShutup()
         end
-end
-
-
+    end
 end
 
 function BankerShutUp:manualShutUpUnShutup()
@@ -77,6 +77,10 @@ end
 
 
 function BankerShutUp:shutup(idNumber, index)
+
+    if mBankerShutUpSV.hardCoreShutUp then
+        SetSetting(SETTING_TYPE_AUDIO, 0, 0)
+    end
 
     local e = {}
     local shouldMute = false
@@ -113,6 +117,10 @@ function BankerShutUp:shutup(idNumber, index)
 end
 
 function BankerShutUp:shutupCraft(idNumber, index)
+
+    if mBankerShutUpSV.hardCoreShutUp then
+        SetSetting(SETTING_TYPE_AUDIO, 0, 0)
+    end
 
     if mBankerShutUpSV.SHUTUP_BLACKSMITH then
         if index == CRAFTING_TYPE_BLACKSMITHING then
@@ -151,12 +159,17 @@ function BankerShutUp:shutupCraft(idNumber, index)
     end
 end
 
+--
 function BankerShutUp:imSorryDelay()
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_AMBIENT_VOLUME, mBankerShutUpSV.Ambience)
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_SFX_VOLUME, mBankerShutUpSV.Effects)
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_FOOTSTEPS_VOLUME, mBankerShutUpSV.Footsteps)
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_VO_VOLUME, mBankerShutUpSV.Dialogue)
-	SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_UI_VOLUME, mBankerShutUpSV.Interface)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_AMBIENT_VOLUME, mBankerShutUpSV.Ambience)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_SFX_VOLUME, mBankerShutUpSV.Effects)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_FOOTSTEPS_VOLUME, mBankerShutUpSV.Footsteps)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_VO_VOLUME, mBankerShutUpSV.Dialogue)
+    SetSetting(SETTING_TYPE_AUDIO, AUDIO_SETTING_UI_VOLUME, mBankerShutUpSV.Interface)
+
+    if mBankerShutUpSV.hardCoreShutUp then
+        SetSetting(SETTING_TYPE_AUDIO, 0, 1)
+    end
 end
 
 
@@ -180,6 +193,7 @@ local function OnAddOnLoaded(eventCode, addOnName)
         ["SHUTUP_ENCHANTER"] = false,
         ["SHUTUP_BANKER"] = true,
         ["SHUTUP_COOK"] = false,
+        ["hardCoreShutUp"] = false,
         ["VolumeControlToMute"] = 0,
         ["VolumeControlToRaise"] = 80,
         ["Ambience"] = 80,
@@ -193,16 +207,15 @@ local function OnAddOnLoaded(eventCode, addOnName)
         ["DialogueMute"] = 0,
         ["InterfaceMute"] = 0,
         ["OnlyTheBankerMute"] = false,
+        ["MasterVolumeMute"] = 0,
+        ["MasterVolume"] = 60,
         ["ShutupTable"] = {}
     }
 
     -- Load saved variables
     mBankerShutUpSV = ZO_SavedVars:NewAccountWide("Luminary_BankerShutup_SV", 14, nil, Default, nil)
 
-
-
     EVENT_MANAGER:RegisterForEvent(BankerShutUp.var.appName, EVENT_PLAYER_ACTIVATED, BankerShutUp.alertBankerLoaded)
-
 
     EVENT_MANAGER:RegisterForEvent(BankerShutUp.var.appName, EVENT_CHATTER_BEGIN, BankerShutUp.shutup)
     EVENT_MANAGER:RegisterForEvent(BankerShutUp.var.appName, EVENT_CHATTER_END, BankerShutUp.imSorry)
