@@ -1,7 +1,0 @@
-## Title: Unicorn
-
-## Author: Helge Milde
-## APIVersion: 100003
-
-Unicorn.lua
-Unicorn/List.lua
