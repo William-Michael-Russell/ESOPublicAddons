@@ -1,47 +1,71 @@
-local LL = LibStub('LibLuminary', 1)
+local LL = LibStub('LibLuminary-2.0', 1)
 if (not LL) then return end
+--Alchemist = {}
 
-
-local config = {
-    addonName = "Alchemist",
-    anchorTargetControl = ZO_AlchemyTopLevelInvenotry,
-    width = 450,
-    height = 400,
-}
-
-local alchemistControl = LL:init(config)
+--local Alchemist.control.twl = LL:init(config)
 
 
 Alchemist = {
     version = "1.6.5.0",
 }
 
+local function blah()
+d(Alchemist.control)
+end
+
+
+
 
 local function on_start_crafting(event_type, crafting_type)
     if crafting_type == CRAFTING_TYPE_ALCHEMY then
-        alchemistControl:SetHidden(false)
-        Alchemist.print_combinations()
+        --Alchemist.control.twl:SetHidden(false)
+    --    zo_callLater(function() Alchemist.print_combinations() end, 1000)
     end
 end
 
 local function on_end_crafting(event_type, crafting_type)
-    alchemistControl:SetHidden(true)
+   -- Alchemist.control.twl:SetHidden(true)
 end
 
 local function on_craft_started(event_type, crafting_type)
     if crafting_type == CRAFTING_TYPE_ALCHEMY then
+
     end
 end
 
 local function on_craft_completed(event_type, crafting_type)
     if crafting_type == CRAFTING_TYPE_ALCHEMY then
-        Alchemist.print_combinations()
+     --   Alchemist.control.twl:ClearText()
+      --  zo_callLater(function() Alchemist.print_combinations() end, 500)
+
     end
 end
 
+
+
+
+
+
 local function on_addon_load(eventCode, addOnName)
     if addOnName == "Alchemist" then
-        Alchemist.initialize()
+
+        local config = {
+            addonName = "Alchemist",
+            anchorTargetControl = ZO_AlchemyTopLevelInvenotry,
+            width = 450,
+            height = 400,
+        }
+        Alchemist = LL:New(config)
+
+        Alchemist:Initialize()
+
+        EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_CRAFTING_STATION_INTERACT, on_start_crafting)
+        EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_END_CRAFTING_STATION_INTERACT, on_end_crafting)
+
+        -- EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_TRAIT_LEARNED, on_craft_completed)
+        EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_CRAFT_STARTED, on_craft_started)
+        EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_CRAFT_COMPLETED, on_craft_completed)
+       -- setupAdditionalUI()
     end
 end
 
@@ -49,8 +73,8 @@ end
 
 function setupAdditionalUI()
     local btn = {}
-     btn.close = CreateControlFromVirtual("AlchClose", alchemistControl, "ZO_DefaultButton")
-    btn.close:SetAnchor(BOTTOMRIGHT, alchemistControl, TOPRIGHT, 0, 40)
+    btn.close = CreateControlFromVirtual("AlchClose", Alchemist.control.twl, "ZO_DefaultButton")
+    btn.close:SetAnchor(BOTTOMRIGHT, anchorTargetControl, TOPRIGHT, 0, 40)
     btn.close:SetWidth(150)
     btn.close:SetText("Close")
     btn.close:SetHandler("OnClicked", function(self) btn.closeAlch()
@@ -66,30 +90,19 @@ function setupAdditionalUI()
     end)
 
      function btn.openAlch()
-        alchemistControl:SetHidden(false)
+        Alchemist.control.twl:SetHidden(false)
         btn.open:SetHidden(true)
     end
 
      function btn.closeAlch()
-        alchemistControl:SetHidden(true)
+        Alchemist.control.twl:SetHidden(true)
         btn.open:SetHidden(false)
     end
 end
 
 
-
-function Alchemist:initialize()
-
-    EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_CRAFTING_STATION_INTERACT, on_start_crafting)
-    EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_END_CRAFTING_STATION_INTERACT, on_end_crafting)
-
-    EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_CRAFT_STARTED, on_craft_started)
-    EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_CRAFT_COMPLETED, on_craft_completed)
-    setupAdditionalUI()
-end
-
 function Alchemist.print_combinations()
-    local inventory = Alchemist.Inventory.new()
+    local inventory = Alchemist.Inventory:new()
     inventory:populate_from_control(ALCHEMY["inventory"])
 
     local num_reagent_slots = Alchemist.get_num_reagent_slots()
@@ -100,27 +113,26 @@ function Alchemist.print_combinations()
 
 
     if #combinations == 0 then
-        alchemistControl:AddText(SI.get(SI.NO_DISCOVERIES_AVAILABLE), Red, Green, Blue)
+        Alchemist.control.twl:AddText(SI.get(SI.NO_DISCOVERIES_AVAILABLE), Red, Green, Blue)
         --        mw:add_message())
     else
 
-        alchemistControl:AddText(string.format(SI.get(SI.COMBINATIONS_AVAILABLE .. #combinations)), Red, Green, Blue)
-        alchemistControl:AddText("")
+        Alchemist.control.twl:AddText(string.format(SI.get(SI.COMBINATIONS_AVAILABLE .. #combinations)), Red, Green, Blue)
         for _, combination in pairs(combinations) do
-            alchemistControl:AddText("\n" ..SI.get(SI.COMBINE_THE_FOLLOWING))
+            Alchemist.control.twl:AddText("\n")
+            Alchemist.control.twl:AddText(SI.get(SI.COMBINE_THE_FOLLOWING))
 
             table.sort(combination.reagents, function(a, b) return a.name < b.name end)
             for _, reagent in pairs(combination.reagents) do
-                alchemistControl:AddText("- |c00ff00" .. reagent.name)
+                Alchemist.control.twl:AddText("- |c00ff00" .. reagent.name)
             end
 
-            alchemistControl:AddText(SI.get(SI.TO_GET_THE_FOLLOWING_DISCOVERIES))
+            Alchemist.control.twl:AddText(SI.get(SI.TO_GET_THE_FOLLOWING_DISCOVERIES))
 
             table.sort(combination.discoveries, function(a, b) return a.reagent.name < b.reagent.name end)
             for _, discovery in pairs(combination.discoveries) do
-                alchemistControl:AddText("- |c9999ff" .. discovery.reagent.name .. ": " .. discovery.trait)
+                Alchemist.control.twl:AddText("- |c9999ff" .. discovery.reagent.name .. ": " .. discovery.trait)
             end
-            alchemistControl:AddText("")
         end
     end
 end
@@ -211,3 +223,6 @@ Alchemist.Batteries = {
 
 
 EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_ADD_ON_LOADED, on_addon_load)
+SLASH_COMMANDS["/damn"] = function(self) LL:DoSomething() end
+SLASH_COMMANDS["/b"] = function(self) blah() end
+

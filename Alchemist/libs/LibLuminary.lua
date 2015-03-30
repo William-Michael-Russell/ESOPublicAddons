@@ -23,8 +23,9 @@ function LibLuminary:init(config)
 
     self.config.addonName = config.addonName
     --    LibLuminary.CreateControl(self)
-
-    return LibLuminary:CreateMsgWindow(self)
+    self.mainCControl = self:CreateMsgWindow(self)
+    self.scrollList = self.mainCControl.list
+    return self.mainCControl
 end
 
 
@@ -70,23 +71,18 @@ function LibLuminary:CreateMsgWindow()
     lltwl:SetDimensionConstraints(minWidth, minHeight)
     lltwl:SetResizeHandleSize(25)
 
+    lltwl:SetHandler("OnShow", function()
+       -- self.playerRank = GetUnitAvARank("player")
+        local scrollList = LibLuminary.scrollList
+       -- local scrollBar = scrollList.scrollbar
+       -- local minValue, maxValue = scrollBar:GetMinMax()
+       -- local centerValue = 1 * ROW_HEIGHT-(scrollList:GetHeight()/2)
+       -- scrollBar:SetValue(centerValue)
+    end)
 
 
-    function lltwl:AddText(_Message, _Red, _Green, _Blue)
-        local Red = _Red or 1
-        local Green = _Green or 1
-        local Blue = _Blue or 1
 
-        if not _Message then return end
-        -- Add message first
-        self:GetNamedChild("Buffer"):AddMessage(_Message, Red, Green, Blue)
-        -- Set new slider value & check visibility
-        AdjustSlider(self)
-    end
 
-    function lltwl:ClearText()
-        self:GetNamedChild("Buffer"):Clear()
-    end
 
     local bg = WINDOW_MANAGER:CreateControl(self.config.addonName .. "Bg", lltwl, CT_BACKDROP)
     bg:SetAnchor(TOPLEFT, lltwl, TOPLEFT, -8, -6)
@@ -105,89 +101,89 @@ function LibLuminary:CreateMsgWindow()
     divider:SetTextureCoords(0.181640625, 0.818359375, 0, 1)
 
 
-    local txtBuffer = WINDOW_MANAGER:CreateControl(self.config.addonName .. "Buffer", lltwl, CT_TEXTBUFFER)
-    txtBuffer:SetFont("ZoFontChat")
-    --txtBuffer:SetScrollPosition(350)
-    --txtBuffer:MoveScrollPosition(350)
 
-    txtBuffer:SetMaxHistoryLines(600)
-    txtBuffer:SetMouseEnabled(true)
-    txtBuffer:SetLinkEnabled(true)
-    txtBuffer:SetAnchor(TOPLEFT, lltwl, TOPLEFT, 20, 65)
-    txtBuffer:SetAnchor(BOTTOMRIGHT, lltwl, BOTTOMRIGHT, -35, -20)
-    txtBuffer:SetHandler("OnLinkMouseUp", function(self, linkText, link, button)
-    --TODO add popup clickable to view item
-        ZO_PopupTooltip_SetLink(link)
-        ZO_LinkHandler_OnLinkMouseUp(link, button, self)
-    end)
-    txtBuffer:SetDimensionConstraints(minWidth - 50, minHeight - 50)
-
-    txtBuffer:SetHandler("OnMouseWheel", function(self, delta, ctrl, alt, shift)
+    local list
+    list = WINDOW_MANAGER:CreateControlFromVirtual(self.config.addonName .. "List", lltwl, "ZO_ScrollList")
+    self.scrollList = list
+    LibLuminary.scrollList = list
+    list:SetAnchor(CENTER, lltwl, CENTER, -8, 10)
+    list:SetHeight(minHeight)
+    list:SetWidth(minWidth)
+    list:SetHandler("OnMouseEnter", function(self, delta, ctrl, alt, shift)
         local offset = delta
-        local slider = txtBuffer:GetParent():GetNamedChild("Slider")
+
+        d (offset)
         if shift then
-            offset = offset * txtBuffer:GetNumVisibleLines()
+            offset = offset * buffer:GetNumVisibleLines()
         elseif ctrl then
-            offset = offset * txtBuffer:GetNumHistoryLines()
-        end
-        txtBuffer:SetScrollPosition(txtBuffer:GetScrollPosition() + offset)
-        slider:SetValue(slider:GetValue() - offset)
-    end)
-
-    local slider = WINDOW_MANAGER:CreateControl(self.config.addonName .. "Slider", lltwl, CT_SLIDER)
-    slider:SetDimensions(16, 31)
-    slider:SetAnchor(TOPRIGHT, lltwl, TOPRIGHT, -24, 59)
-    slider:SetAnchor(BOTTOMRIGHT, lltwl, BOTTOMRIGHT, -14, -79)
-    slider:SetHidden(true)
-    slider:SetThumbTexture("EsoUI/Art/ChatWindow/chat_thumb.dds", "EsoUI/Art/ChatWindow/chat_thumb_disabled.dds", nil, 9, 23, nil, nil, 0.6975, nil)
-    slider:SetBackgroundMiddleTexture("EsoUI/Art/ChatWindow/chat_scrollbar_track.dds")
-    slider:SetMinMax(1, 1)
-    slider:SetMouseEnabled(true)
-    slider:SetValueStep(1)
-    slider:SetValue(1)
-
-
-    slider:SetHandler("OnValueChanged", function(self, value, eventReason)
-        local numHistoryLines = self:GetParent():GetNamedChild("Buffer"):GetNumHistoryLines()
-        local sliderValue = slider:GetValue()
-
-        if eventReason == EVENT_REASON_HARDWARE then
-            txtBuffer:SetScrollPosition(numHistoryLines - sliderValue)
+            offset = offset * buffer:GetNumHistoryLines()
         end
     end)
 
+    local i = 0
+    local xOffset = 0
+    local lastlabel
+    local parent = AlchemistListScrollChild
+    function lltwl:AddLabel(txt, messages)
 
-    local scrollUp = WINDOW_MANAGER:CreateControlFromVirtual(self.config.addonName .. "SliderScrollUp", slider, "ZO_ScrollUpButton")
-    scrollUp:SetAnchor(BOTTOM, slider, TOP, -1, 0)
-    scrollUp:SetNormalTexture("EsoUI/Art/ChatWindow/chat_scrollbar_upArrow_up.dds")
-    scrollUp:SetPressedTexture("EsoUI/Art/ChatWindow/chat_scrollbar_upArrow_down.dds")
-    scrollUp:SetMouseOverTexture("EsoUI/Art/ChatWindow/chat_scrollbar_upArrow_over.dds")
-    scrollUp:SetDisabledTexture("EsoUI/Art/ChatWindow/chat_scrollbar_upArrow_disabled.dds")
-    scrollUp:SetHandler("OnMouseDown", function(...)
-        txtBuffer:SetScrollPosition(txtBuffer:GetScrollPosition() - 20)
-        slider:SetValue(slider:GetValue() - 1)
-    end)
+        local function listRow_Setup(rowControl, data, list)
+            d("hello")
+            rowControl:SetHeight(50)
+            rowControl:SetFont("ZoFontWinH4")
+            rowControl:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+            rowControl:SetVerticalAlignment(TEXT_ALIGN_CENTER)
+            rowControl:SetWrapMode(TEXT_WRAP_MODE_ELLIPSIS)
 
+            --        rowControl:SetHandler("OnMouseEnter", function(self) ShowTooltip(rowControl, data) end)
+            --        rowControl:SetHandler("OnMouseExit", HideTooltip)
 
-    local scrollDown = WINDOW_MANAGER:CreateControlFromVirtual(self.config.addonName .. "SliderScrollDown", slider, "ZO_ScrollDownButton")
-    scrollDown:SetAnchor(TOP, slider, BOTTOM, -1, 0)
-    scrollDown:SetNormalTexture("EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_up.dds")
-    scrollDown:SetPressedTexture("EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_down.dds")
-    scrollDown:SetMouseOverTexture("EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_over.dds")
-    scrollDown:SetDisabledTexture("EsoUI/Art/ChatWindow/chat_scrollbar_downArrow_disabled.dds")
-    scrollDown:SetHandler("OnMouseDown", function(...)
-        txtBuffer:SetScrollPosition(txtBuffer:GetScrollPosition() - 1)
-        slider:SetValue(slider:GetValue() + 1)
-    end)
+            rowControl:SetColor(.772549,.760784,.61960,1)
 
 
-    local scrollEnd = WINDOW_MANAGER:CreateControlFromVirtual(self.config.addonName .. "SliderScrollEnd", slider, "ZO_ScrollEndButton")
-    scrollEnd:SetDimensions(16, 16)
-    scrollEnd:SetAnchor(TOP, scrollDown, BOTTOM, 0, 0)
-    scrollEnd:SetHandler("OnMouseDown", function(...)
-        txtBuffer:SetScrollPosition(0)
-        slider:SetValue(txtBuffer:GetNumHistoryLines())
-    end)
+            local text = "Hello"
+            rowControl:SetText(messages)
+        end
+
+        d("Hellooo")
+        ZO_ScrollList_AddDataType(list, 1, "ZO_SelectableLabel", 15, listRow_Setup)
+--
+
+
+
+        --        i = i + 1
+--        if message == "" or nil then return end
+--
+--        local label = WINDOW_MANAGER:CreateControl("a".. "Label" .. i, list, CT_LABEL)
+--        label:SetText(messages)
+--        label:SetHorizontalAlignment(nil)
+--
+--        label:SetFont("ZoFontGame")
+--        label:SetWrapMode(TEXT_WRAP_MODE_ELLIPSIS)
+--        --local textHeight = label:GetTextHeight()
+--        label:SetDimensions(minWidth, 30)
+--       -- label:SetDimensionConstraints(minWidth - 60, textHeight, nil, textHeight)
+--        label:ClearAnchors()
+--        if lastlabel == nil then
+--             label:SetAnchor(TOP, list, TOP, 40, xOffset)
+--        else
+--            label:SetAnchor(TOP, lastlabel, CENTER, 0, xOffset + 5)
+--        end
+--
+--        label:SetHandler("OnMouseEnter", function(self, delta, ctrl, alt, shift)
+--            local offset = delta
+--
+--            d (offset)
+--            if shift then
+--                offset = offset * buffer:GetNumVisibleLines()
+--            elseif ctrl then
+--                offset = offset * buffer:GetNumHistoryLines()
+--            end
+--        end)
+--
+--        lastlabel = label
+--        local xOffset = 0
+    end
+
 
     if self.config.addonName and self.config.addonName ~= "" then
         local label = WINDOW_MANAGER:CreateControl(self.config.addonName .. "Label", lltwl, CT_LABEL)
@@ -200,12 +196,24 @@ function LibLuminary:CreateMsgWindow()
         label:SetAnchor(TOPLEFT, lltwl, TOPLEFT, 30, (40 - textHeight) / 2 + 5)
         label:SetAnchor(TOPRIGHT, lltwl, TOPRIGHT, -30, (40 - textHeight) / 2 + 5)
     end
+
+    function lltwl:AddText(_Message)
+        if not _Message then return end
+        self:AddLabel(self, _Message)
+    end
+
+    function lltwl:ClearText()
+        ZO_ScrollList_Clear(parent)
+    end
+
+
+
     return lltwl
 end
 
 
 
----- Buffered Reached
+--- - Buffered Reached
 --
 
 local BufferTable = {}

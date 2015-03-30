@@ -1,14 +1,14 @@
 ## Title: Alchemist
-
 ## Author: Helge Milde / mild re-write @awesomebilly
 ## APIVersion: 100011
+## Version: 1.6.5.0
 
-
-## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibLuminary.lua
+## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibLuminary-2.0.lua
 ## SavedVariables: alchemist_sv
 
 libs/LibStub.lua
-libs/LibLuminary.lua
+Alchemist.xml
+libs/LibLuminary-2.0.lua
 
 libs/LibAddonMenu-2.0/LibAddonMenu-2.0.lua
 libs/LibAddonMenu-2.0/controls/panel.lua
@@ -34,7 +34,7 @@ Alchemist/Reagent.lua
 Alchemist/Algorithm.lua
 Alchemist/Inventory.lua
 
-Alchemist.xml
+
 
 
 ; Original Author Helge, Maintainer / mild re-write @Awesomebilly.

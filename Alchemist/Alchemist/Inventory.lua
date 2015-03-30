@@ -112,15 +112,33 @@ local all_reagents = {
     },
 
 }
--- }}}
+local Reagent = {}
+
+function Reagent:new(name, qty, traits, bag_id, slot_index)
+    local self = {
+        name = name,
+        qty = qty,
+        traits = traits,
+        bag_id = bag_id,
+        slot_index = slot_index,
+    }
+    setmetatable(self, {__index = Reagent})
+
+    return self
+end
+
+function Reagent:discover(trait)
+    assert(self.traits[trait] == false)
+    self.traits[trait] = true
+end
+
+
 
 local Inventory = {}
 
-function Inventory.new()
-    local self = {
-        reagents = {}
-    }
-    setmetatable(self, { __index = Inventory })
+function Inventory:new()
+       self.reagents = {}
+       setmetatable(self, { __index = Inventory })
     
     return self
 end
@@ -152,7 +170,7 @@ function Inventory:add_reagent(reagent_name, qty, known_traits, bag_id, slot_ind
     local num_traits = Alchemist.Batteries.num_items_in_table(traits)
     assert(num_traits == 4, string.format("Found %d traits; something is wrong with the reagent '%s'.", num_traits, reagent_name))
 
-    self.reagents[reagent_name] = Alchemist.Reagent:new(reagent_name, qty, traits, bag_id, slot_index)
+    self.reagents[reagent_name] = Reagent:new(reagent_name, qty, traits, bag_id, slot_index)
     
     return self.reagents[reagent_name]
 end

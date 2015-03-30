@@ -4,7 +4,7 @@ local SI = Alchemist.SI
 -- output texts
 mkstr(SI.NO_DISCOVERIES_AVAILABLE,          "No discoveries available.")
 mkstr(SI.COMBINATIONS_AVAILABLE,            "%d combination(s) available!")
-mkstr(SI.COMBINE_THE_FOLLOWING,             "\nCombine the following:")
+mkstr(SI.COMBINE_THE_FOLLOWING,             "Combine the following:")
 mkstr(SI.TO_GET_THE_FOLLOWING_DISCOVERIES,  ".. to discover the following:")
 
 -- reagents
