@@ -1,0 +1,158 @@
+<!--<GuiXml>-->
+    <!--<Controls>-->
+        <!--<TopLevelControl name="LuminaryLib" clampedToScreen="true" mouseEnabled="true" movable="true" hidden="false" resizeHandleSize="12">-->
+            <!--<Dimensions x="400" y="400" />-->
+            <!--<DimensionConstraints minX="400" minY="400" />-->
+            <!--<Anchor point="TOPLEFT" relativeTo="GuiRoot" relativePoint="TOPLEFT"  offsetX="200" offsetY="144"/>-->
+            <!--<Controls>-->
+                <!--<Backdrop name="$(parent)BG" inherits="ZO_DefaultBackdrop"  hidden="false" alpha="1" layer="0" level="0" tier="0" >-->
+                    <!--<AnchorFill />-->
+                <!--</Backdrop>-->
+                <!--<Button name="$(parent)ToggleOptions" inherits="ZO_ButtonBehaviorClickSound" >-->
+                    <!--<Dimensions x="32" y="32" />-->
+                    <!--<Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="10" offsetY="10"/>-->
+                    <!--<OnMouseUp>-->
+                        <!--&lt;!&ndash;Click4Info_Toggle_Options(self, button, upInside)&ndash;&gt;-->
+                    <!--</OnMouseUp>-->
+                    <!--<Textures-->
+                            <!--normal="/esoui/art/crafting/smithing_leftarrow_up.dds"-->
+                            <!--pressed="/esoui/art/crafting/smithing_leftarrow_down.dds"-->
+                            <!--mouseOver="/esoui/art/crafting/smithing_leftarrow_over.dds"-->
+                            <!--disabled="/esoui/art/crafting/smithing_leftarrow_disabled.dds"-->
+                            <!--/>-->
+                <!--</Button>-->
+                <!--<Label name="$(parent)Label" font="ZoFontWinH2" color="FFFFFF" wrapMode="ELLIPSIS" text="|cFF0000 Circonians |c00FFFF Click4Info" verticalAlignment="CENTER" horizontalAlignment="LEFT" alpha="1" layer="0" level="0" tier="1" >-->
+                    <!--<Dimensions x="260" y="30" />-->
+                    <!--<Anchor point="TOPLEFT" relativeTo="$(parent)ToggleOptions" relativePoint="TOPLEFT" offsetX="20" offsetY="0"/>-->
+                <!--</Label>-->
+
+                <!--<Button name="$(parent)CaseSens" inherits="ZO_CheckButton" >-->
+                    <!--<Dimensions x="32" y="32" />-->
+                    <!--<Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="TOPRIGHT" offsetX="10" offsetY="0"/>-->
+                    <!--<OnClicked>-->
+                        <!--ZO_CheckButton_OnClicked(self, button)-->
+                    <!--</OnClicked>-->
+                    <!--<Controls>-->
+                        <!--<Label name="$(parent)Label" font="ZoFontGameBold" color="FFFFFF" wrapMode="ELLIPSIS" text="Case Sensitive" verticalAlignment="CENTER" horizontalAlignment="LEFT" alpha="1" layer="0" level="0" tier="1" >-->
+                            <!--<Anchor point="TOPLEFT" relativeTo="$(parent)CaseSens" relativePoint="TOPRIGHT" offsetX="10" offsetY="-5"/>-->
+                            <!--<Anchor point="BOTTOMRIGHT" relativeTo="$(parent)CaseSens" relativePoint="BOTTOMRIGHT" offsetX="108" offsetY="7"/>-->
+                        <!--</Label>-->
+                    <!--</Controls>-->
+                <!--</Button>-->
+
+                <!--<Button name="$(parent)ShowScriptWindow" inherits="ZO_ButtonBehaviorClickSound" >-->
+                    <!--<Dimensions x="32" y="32" />-->
+                    <!--<Anchor point="TOPRIGHT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="-10" offsetY="10"/>-->
+                    <!--<OnMouseUp>-->
+                        <!--&lt;!&ndash;Click4Info_Toggle_ScriptWindow(self, button, upInside)&ndash;&gt;-->
+                    <!--</OnMouseUp>-->
+                    <!--<Textures-->
+                            <!--normal="/esoui/art/crafting/smithing_rightarrow_up.dds"-->
+                            <!--pressed="/esoui/art/crafting/smithing_rightarrow_down.dds"-->
+                            <!--mouseOver="/esoui/art/crafting/smithing_rightarrow_over.dds"-->
+                            <!--disabled="/esoui/art/crafting/smithing_rightarrow_disabled.dds"-->
+                            <!--/>-->
+                <!--</Button>-->
+                <!--<Button name="$(parent)ShowSlashCmdWin" inherits="ZO_ButtonBehaviorClickSound" >-->
+                    <!--<Dimensions x="32" y="32" />-->
+                    <!--<Anchor point="TOPRIGHT" relativeTo="$(parent)ShowScriptWindow" relativePoint="TOPLEFT" offsetX="-10" offsetY="0"/>-->
+                    <!--<OnMouseUp>-->
+                        <!--&lt;!&ndash;Click4Info_Toggle_AddSlashCmdWin(self, button, upInside)&ndash;&gt;-->
+                    <!--</OnMouseUp>-->
+                    <!--<Textures-->
+                            <!--normal="/esoui/art/crafting/smithing_rightarrow_up.dds"-->
+                            <!--pressed="/esoui/art/crafting/smithing_rightarrow_down.dds"-->
+                            <!--mouseOver="/esoui/art/crafting/smithing_rightarrow_over.dds"-->
+                            <!--disabled="/esoui/art/crafting/smithing_rightarrow_disabled.dds"-->
+                            <!--/>-->
+                <!--</Button>-->
+                <!--<Control name="$(parent)MenuBar" inherits="ZO_MenuBarTemplate">-->
+                    <!--<Anchor point="TOPLEFT" relativeTo="$(parent)Label" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="10"/>-->
+                    <!--<Anchor point="BOTTOMRIGHT" relativeTo="$(parent)Label" relativePoint="BOTTOMRIGHT" offsetX="0" offsetY="50"/>-->
+                    <!--<OnInitialized>-->
+                        <!--&lt;!&ndash;ZO_MenuBar_OnInitialized(self)&ndash;&gt;-->
+                        <!--&lt;!&ndash;local barData =&ndash;&gt;-->
+                        <!--&lt;!&ndash;{&ndash;&gt;-->
+                        <!--&lt;!&ndash;buttonPadding = 0,&ndash;&gt;-->
+                        <!--&lt;!&ndash;normalSize = 40,&ndash;&gt;-->
+                        <!--&lt;!&ndash;downSize = 64,&ndash;&gt;-->
+                        <!--&lt;!&ndash;animationDuration = DEFAULT_SCENE_TRANSITION_TIME,&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;buttonTemplate = "Click4InfoItButtonTemplateWithToolTips",&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;}&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;ZO_MenuBar_SetData(self, barData)&ndash;&gt;-->
+                    <!--</OnInitialized>-->
+                <!--</Control>-->
+
+                <!--<Backdrop name="$(parent)EditBg" inherits="ZO_EditBackdrop" alpha="1" layer="0" level="0" tier="0" >-->
+                    <!--<Anchor point="TOPLEFT" relativeTo-->
+                            <!--="$(parent)MenuBar" relativePoint="BOTTOMLEFT"  offsetX="0" offsetY="10"/>-->
+                    <!--<Anchor point="BOTTOMRIGHT" relativeTo="$(parent)MenuBar" relativePoint="BOTTOMRIGHT"  offsetX="0" offsetY="30"/>-->
+                <!--</Backdrop>-->
+                <!--<EditBox name="$(parent)EditBox" font="ZoFontChat" horizontalAlignment="LEFT" verticalAlignment="CENTER" text="" editEnabled="true" maxInputCharacters="64" multiLine="false" newLineEnabled="false" inherits="ZO_DefaultEditForBackdrop">-->
+                    <!--<Anchor point="TOPLEFT" relativeTo="$(parent)EditBg" relativePoint="TOPLEFT"/>-->
+                    <!--<Anchor point="BOTTOMRIGHT" relativeTo="$(parent)EditBg" relativePoint="BOTTOMRIGHT"  />-->
+                    <!--<OnEnter>-->
+                        <!--Click4Info_Search(self:GetText())-->
+                    <!--</OnEnter>-->
+                <!--</EditBox>-->
+
+                <!--<Control name="$(parent)ScrollList" inherits="ZO_ScrollList" >-->
+                    <!--<Anchor point="TOPLEFT" relativeTo="$(parent)EditBox" relativePoint="BOTTOMLEFT" offsetY="10"/>-->
+                    <!--<Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" offsetX="-10" offsetY="-10"/>-->
+                <!--</Control>-->
+
+
+                <!--&lt;!&ndash;<Control name="$(parent)Container" inherits="ZO_ScrollContainer">&ndash;&gt;-->
+                <!--&lt;!&ndash;<Anchor point="TOPLEFT" offsetY="12" />&ndash;&gt;-->
+                <!--&lt;!&ndash;<Anchor point="BOTTOMRIGHT" offsetY="-12" />&ndash;&gt;-->
+                <!--&lt;!&ndash;</Control>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<Label name="$(parent)Roll" font="ZoFontGame" color="CFDCBD" wrapMode="ELLIPSIS">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<OnInitialized>&ndash;&gt;-->
+                        <!--&lt;!&ndash;local text = {&ndash;&gt;-->
+                        <!--&lt;!&ndash;"Aldmeri Dominion",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Khenarthis Roost: 11",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Auridon: 51",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Grahtwood: 44",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Greenshade: 50",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Malabal Tor: 45",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Reaper's March: 60",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"Daggerfall Covenant",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Stros M'Kai: 15",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Betnikh: 9",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Glenumbra: 67",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Stormhaven: 70",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Rivenspir: 48",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Alik'r Desert: 53",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Bangkorai: 47",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"Ebonheart Pact",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Bleakrock Isle: 12",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Bal Foyen: 9",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Stonefalls: 76",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Deshaan: 67",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Shadowfen: 64",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Eastmarch: 52",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*The Rift: 73",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"Quest for all factions",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Coldharbour: 32",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Craglorn: 18",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Cyrodill: 566",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"Quest by Guild",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Fighters Guild: 5",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Mages Guild: 8",&ndash;&gt;-->
+                        <!--&lt;!&ndash;"*Undaunted: Unknown",&ndash;&gt;-->
+                        <!--&lt;!&ndash;}&ndash;&gt;-->
+                        <!--&lt;!&ndash;local parent = self:GetParent():GetNamedChild("ContainerScrollChild")&ndash;&gt;-->
+                        <!--&lt;!&ndash;self:SetParent(parent)&ndash;&gt;-->
+                        <!--&lt;!&ndash;self:SetAnchor(TOPLEFT, parent, TOPLEFT, 18, 6)&ndash;&gt;-->
+                        <!--&lt;!&ndash;self:SetText(table.concat(text, "\n"))&ndash;&gt;-->
+                    <!--&lt;!&ndash;</OnInitialized>&ndash;&gt;-->
+                <!--&lt;!&ndash;</Label>&ndash;&gt;-->
+            <!--</Controls>-->
+        <!--</TopLevelControl>-->
+    <!--</Controls>-->
+<!--</GuiXml>-->

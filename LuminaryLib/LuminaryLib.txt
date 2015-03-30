@@ -1,0 +1,29 @@
+## Title: LuminaryLib
+
+## Author: @awesomebilly
+## APIVersion: 100011
+## SavedVariables: LuminaryLib
+## Version: 1.6.5.0
+## OptionalDependsOn: LibStub LibAddonMenu-2.0
+;LibLuminary-1.0.lua
+
+libs/LibStub.lua
+;libs/LibLuminary-2.0.lua
+;libs/LibLuminary.xml
+
+libs/LibAddonMenu-2.0/LibAddonMenu-2.0.lua
+libs/LibAddonMenu-2.0/controls/panel.lua
+libs/LibAddonMenu-2.0/controls/submenu.lua
+libs/LibAddonMenu-2.0/controls/button.lua
+libs/LibAddonMenu-2.0/controls/checkbox.lua
+libs/LibAddonMenu-2.0/controls/colorpicker.lua
+libs/LibAddonMenu-2.0/controls/custom.lua
+libs/LibAddonMenu-2.0/controls/description.lua
+libs/LibAddonMenu-2.0/controls/dropdown.lua
+libs/LibAddonMenu-2.0/controls/editbox.lua
+libs/LibAddonMenu-2.0/controls/header.lua
+libs/LibAddonMenu-2.0/controls/slider.lua
+libs/LibAddonMenu-2.0/controls/texture.lua
+
+LuminaryLib.lua
+
