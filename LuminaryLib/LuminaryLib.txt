@@ -4,12 +4,10 @@
 ## APIVersion: 100011
 ## SavedVariables: LuminaryLib
 ## Version: 1.6.5.0
-## OptionalDependsOn: LibStub LibAddonMenu-2.0
-;LibLuminary-1.0.lua
+## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibLuminary-2.0.lua
 
 libs/LibStub.lua
-;libs/LibLuminary-2.0.lua
-;libs/LibLuminary.xml
+libs/LibLuminary-2.0.lua
 
 libs/LibAddonMenu-2.0/LibAddonMenu-2.0.lua
 libs/LibAddonMenu-2.0/controls/panel.lua
