@@ -29,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/LuminaryLib.lua">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="870">
-              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -38,8 +38,8 @@
       <file leaf-file-name="LibLuminary-2.0.lua" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/libs/LibLuminary-2.0.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27561837" vertical-offset="936" max-vertical-offset="3435">
-              <caret line="78" column="7" selection-start-line="75" selection-start-column="4" selection-end-line="78" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.50729924" vertical-offset="2208" max-vertical-offset="3450">
+              <caret line="175" column="43" selection-start-line="175" selection-start-column="43" selection-end-line="175" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -173,7 +173,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="LayoutCode.rearrangeEntriesXML" value="false" />
     <property name="LayoutCode.rearrangeEntriesLua" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Click4Info" />
+    <property name="last_opened_file_path" value="$USER_HOME$/eso/ESOPublicAddons/Alchemist" />
     <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
@@ -537,15 +537,15 @@
     <entry file="file://$PROJECT_DIR$/LuminaryLib.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="870">
-          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libs/LibLuminary-2.0.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27561837" vertical-offset="936" max-vertical-offset="3435">
-          <caret line="78" column="7" selection-start-line="75" selection-start-column="4" selection-end-line="78" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.50729924" vertical-offset="2208" max-vertical-offset="3450">
+          <caret line="175" column="43" selection-start-line="175" selection-start-column="43" selection-end-line="175" selection-end-column="43" />
           <folding />
         </state>
       </provider>

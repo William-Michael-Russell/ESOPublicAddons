@@ -138,6 +138,7 @@ end
 
 function LibLuminary:CreateScrollList()
 
+
     local tlw = WINDOW_MANAGER:CreateTopLevelWindow("awesomezz")
     tlw:SetDimensions(275, 200)
     tlw:SetHidden(false)

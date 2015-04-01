@@ -80,7 +80,7 @@ local function get_best_combination(inventory, max_reagents)
     end
 end
 
-local function get_optimal_combinations(inventory, max_reagents)
+function get_optimal_combinations(inventory, max_reagents)
     -- returns a list of combinations that can be done in order, to maximize discovery of traits.
     local ret = {}
 
@@ -104,5 +104,5 @@ local function get_optimal_combinations(inventory, max_reagents)
 end
 
 Alchemist.Algorithm = {
-    get_optimal_combinations = get_optimal_combinations,
+    get_optimal_combinations = get_optimal_combinations
 }

@@ -134,7 +134,7 @@ end
 
 
 
-local Inventory = {}
+Inventory = {}
 
 function Inventory:new()
        self.reagents = {}
@@ -189,7 +189,9 @@ function Inventory:get_reagent(reagent_name)
 end
 
 function Inventory:num_reagents()
-    return Alchemist.Batteries.num_items_in_table(self.reagents)
+    d("Batteries")
+
+    return num_items_in_table(self.reagents)
 end
 
 function Inventory:get_reagent_names()
