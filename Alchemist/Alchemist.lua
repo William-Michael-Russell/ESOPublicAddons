@@ -78,41 +78,17 @@ function Alchy:CreateScrollList()
 
     self.c_scrollList = win.list
 
-    local function listRow_Setup(rowControl, data, list)
-        rowControl:SetHeight(ROW_HEIGHT)
-        rowControl:SetFont("ZoFontWinH4")
-        rowControl:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
-        rowControl:SetVerticalAlignment(TEXT_ALIGN_CENTER)
-        rowControl:SetWrapMode(TEXT_WRAP_MODE_ELLIPSIS)
-
-        --        rowControl:SetHandler("OnMouseEnter", function(rowControl) ShowTooltip(rowControl, data) end)
-        --        rowControl:SetHandler("OnMouseExit", HideTooltip)
-
-        local rankInfo = data.dataEntry.data
-        if rankInfo.rankNum == self.playerRank then
-            rowControl:SetColor(1, 0, 0, 1)
-        else
-            --rowControl:SetColor(1,.784,.588,1)
-            rowControl:SetColor(.772549, .760784, .61960, 1)
-        end
-    end
-
-    ZO_ScrollList_AddDataType(win.list, 1, "ZO_SelectableLabel", ROW_HEIGHT, listRow_Setup)
-
---    Alchy:print_combinations()
-    --    ZO_ScrollList_Clear(self.scrollList)
-
     return win
 end
 
 function Alchy:print_combinations()
-    --    local SI = Alchemist.SI
+
     local inventory = Inventory:new()
-    assert(inventory ~= nil, "Because... this hates me.. damn inventory")
+    assert(inventory ~= nil, "Because... this hates me...")
     self.tbl = {}
     local entryList = ZO_ScrollList_GetDataList(self.scrollList)
     local discovery = 1
-    --
+    self.tbl[discovery] = {}
     --
     --
     inventory:populate_from_control(ALCHEMY["inventory"])
@@ -120,67 +96,65 @@ function Alchy:print_combinations()
     local num_reagent_slots = self.get_num_reagent_slots()
     local combinations = get_optimal_combinations(inventory, num_reagent_slots)
 
-    self.tbl[discovery] = {}
-    local lol = {
-        shit = "Hello"
-    }
-    d("shitter")
-    d(lol.shit)
+    d("Dont be nil")
+    d(#combinations)
+    local t = {}
+    t.combineTheFollowing = SI.get(SI.COMBINE_THE_FOLLOWING)
+    t.noDiscoveries = SI.get(SI.NO_DISCOVERIES_AVAILABLE)
+    t.reagents = {}
+    t.discovery = {}
 
 
-    for i = 1, 20 do
-        d("fukkk")
---        d(lol.shit)
-        table.insert(self.tbl[discovery], lol)
+    if #combinations == 0 then
+
+    else
+
+
+        for _, combination in pairs(combinations) do
+            --This prints here
+            --            mw:add_message(SI.get(SI.COMBINE_THE_FOLLOWING))
+            table.sort(combination.reagents, function(a, b) return a.name < b.name end)
+            for _, reagent in pairs(combination.reagents) do
+                --should have added reagent here
+                --                mw:add_message("- |c00ff00" .. reagent.name)
+                table.insert(t.reagents, reagent)
+            end
+            --Another line was added here..
+            --            mw:add_message(SI.get(SI.TO_GET_THE_FOLLOWING_DISCOVERIES))
+            table.sort(combination.discoveries, function(a, b) return a.reagent.name < b.reagent.name end)
+            for _, discovery in pairs(combination.discoveries) do
+                -- another msg
+                -- mw:add_message("- |c9999ff" .. discovery.reagent.name .. ": " .. discovery.trait)
+                table.insert(t.discovery, discovery)
+            end
+        end
     end
 
-    for i = 1, #self.tbl[discovery] do
+    for counter, combination in pairs(combinations) do
 
-        local entry = ZO_ScrollList_CreateDataEntry(1, self.tbl[discovery][i])
+        local entry = ZO_ScrollList_CreateDataEntry(1, t)
         table.insert(entryList, entry)
     end
-    --
-    --    if #combinations == 0 then
-    --        table.insert(self.tbl[discovery], fucker)
-    --    else
-    --        table.insert(self.tbl[discovery], fucker)
-    --- -
-    -- end
-    -- for _, combination in pairs(self.tbl[discovery]) do
-    -- d('shit')
-    -- d(combination)
-    --
-    -- end
-    -- Alchemist.control.twl:AddText(string.format(SI.get(SI.COMBINATIONS_AVAILABLE .. #combinations)), Red, Green, Blue)
-    -- d(combinations)
-    -- for _, combination in pairs(combinations) do
-    -- table.insert(self.tbl[discovery], SI.get(SI.COMBINE_THE_FOLLOWING))
-    -- table.insert(self.tbl[discovery], SI.get(SI.COMBINE_THE_FOLLOWING))
-    -- -- Alchemist.control.twl:AddText("\n")
-    -- -- Alchemist.control.twl:AddText(SI.get(SI.COMBINE_THE_FOLLOWING))
-    --
-    -- table.sort(combination.reagents, function(a, b) return a.name < b.name end)
-    -- for _, reagent in pairs(combination.reagents) do
-    -- table.insert(self.tbl[discovery], "- |c00ff00" .. reagent.name)
-    -- -- Alchemist.control.twl:AddText()
-    -- end
-    --
-    -- -- Alchemist.control.twl:AddText(SI.get(SI.TO_GET_THE_FOLLOWING_DISCOVERIES))
-    -- --
-    -- -- table.sort(combination.discoveries, function(a, b) return a.reagent.name < b.reagent.name end)
-    -- -- for _, discovery in pairs(combination.discoveries) do
-    -- -- Alchemist.control.twl:AddText("- |c9999ff" .. discovery.reagent.name .. ": " .. discovery.trait)
-    -- -- end
-    -- end
-    -- end
-    --
-    --
-    d("above")
-    for i = 1, #self.tbl[discovery] do
-        d(self.tbl[discovery][i])
-        local entry = ZO_ScrollList_CreateDataEntry(1, self.tbl[discovery][i])
-        table.insert(entryList, entry)
+
+
+
+    local shithead = 0
+    local function listRow_Setup(listContoller, data, list)
+        shithead = shithead + 1
+
+        listContoller:SetHeight(ROW_HEIGHT)
+        listContoller:SetFont("ZoFontWinH4")
+        listContoller:SetHorizontalAlignment(TEXT_ALIGN_LEFT)
+        listContoller:SetVerticalAlignment(TEXT_ALIGN_CENTER)
+        listContoller:SetWrapMode(TEXT_WRAP_MODE_ELLIPSIS)
+        if (#combinations - 1 ~= shithead) then
+            listContoller:SetText(data.dataEntry.data.discovery[shithead].reagent.name)
+        end
     end
+
+    ZO_ScrollList_AddDataType(self.scrollList, 1, "ZO_SelectableLabel", ROW_HEIGHT, listRow_Setup)
+
+
 
     ZO_ScrollList_Commit(self.scrollList)
     --    -----------------------------------------------------------
@@ -443,7 +417,8 @@ function combinations(lst, n)
         while (a[i] == (number - select + i)) do
             i = i - 1
         end
-        if (i < 1) then break end
+        if (i < 1) then break
+        end
         a[i] = a[i] + 1
         for j = i, select do
             a[j] = a[i] + j - i
@@ -454,21 +429,27 @@ end
 
 local BufferTable = {}
 function Alchy:BufferReached(key, buffer)
-    if key == nil then return end
-    if BufferTable[key] == nil then BufferTable[key] = {} end
+    if key == nil then return
+    end
+    if BufferTable[key] == nil then BufferTable[key] = {}
+    end
 
     BufferTable[key].buffer = buffer or 15
     BufferTable[key].now = GetFrameTimeSeconds()
-    if BufferTable[key].last == nil then BufferTable[key].last = BufferTable[key].now end
+    if BufferTable[key].last == nil then BufferTable[key].last = BufferTable[key].now
+    end
     BufferTable[key].diff = BufferTable[key].now - BufferTable[key].last
     BufferTable[key].eval = BufferTable[key].diff >= BufferTable[key].buffer
-    if BufferTable[key].eval then BufferTable[key].last = BufferTable[key].now end
+    if BufferTable[key].eval then BufferTable[key].last = BufferTable[key].now
+    end
     return BufferTable[key].eval
 end
 
 
 
 EVENT_MANAGER:RegisterForEvent("Alchemist", EVENT_ADD_ON_LOADED, on_addon_load)
-SLASH_COMMANDS["/damn"] = function(self) Alchemist:DoSomething() end
-SLASH_COMMANDS["/b"] = function(self) Alchemist:blah(Alchemist.self) end
+SLASH_COMMANDS["/damn"] = function(self) Alchemist:DoSomething()
+end
+SLASH_COMMANDS["/b"] = function(self) Alchemist:blah(Alchemist.self)
+end
 

@@ -156,7 +156,7 @@ function Inventory:add_reagent(reagent_name, qty, known_traits, bag_id, slot_ind
 
         -- key = trait name
         -- value = is discovered
-        traits[trait] = Alchemist.Batteries.element_is_in_table(trait, known_traits)
+        traits[trait] = Batteries.element_is_in_table(trait, known_traits)
     end
 
     -- This check makes sure that the player didn't have some trait in his inventory that ISN'T in all_reagents.
@@ -167,7 +167,7 @@ function Inventory:add_reagent(reagent_name, qty, known_traits, bag_id, slot_ind
     
     assert(self.reagents[reagent_name] == nil, string.format("Tried to add '%s', but it's already added.", reagent_name))
 
-    local num_traits = Alchemist.Batteries.num_items_in_table(traits)
+    local num_traits = Batteries.num_items_in_table(traits)
     assert(num_traits == 4, string.format("Found %d traits; something is wrong with the reagent '%s'.", num_traits, reagent_name))
 
     self.reagents[reagent_name] = Reagent:new(reagent_name, qty, traits, bag_id, slot_index)
@@ -189,13 +189,11 @@ function Inventory:get_reagent(reagent_name)
 end
 
 function Inventory:num_reagents()
-    d("Batteries")
-
     return num_items_in_table(self.reagents)
 end
 
 function Inventory:get_reagent_names()
-    return Alchemist.Batteries.table_keys_to_list(self.reagents)
+    return Batteries.table_keys_to_list(self.reagents)
 end
 
 function Inventory:populate_from_control(control)
