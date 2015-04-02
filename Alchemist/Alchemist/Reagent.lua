@@ -13,6 +13,7 @@ function Reagent:new(name, qty, traits, bag_id, slot_index)
     return self
 end
 
+
 function Reagent:discover(trait)
     assert(self.traits[trait] == false)
     self.traits[trait] = true

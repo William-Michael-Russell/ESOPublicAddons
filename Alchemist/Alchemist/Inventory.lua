@@ -112,35 +112,186 @@ local all_reagents = {
     },
 
 }
-local Reagent = {}
+-- }}}
 
-function Reagent:new(name, qty, traits, bag_id, slot_index)
+local Inventory = {}
+
+function Inventory.new()
     local self = {
-        name = name,
-        qty = qty,
-        traits = traits,
-        bag_id = bag_id,
-        slot_index = slot_index,
+        reagents = {}
     }
-    setmetatable(self, {__index = Reagent})
-
-    return self
-end
-
-function Reagent:discover(trait)
-    assert(self.traits[trait] == false)
-    self.traits[trait] = true
-end
-
-
-
-Inventory = {}
-
-function Inventory:new()
-       self.reagents = {}
-       setmetatable(self, { __index = Inventory })
+    setmetatable(self, { __index = Inventory })
     
     return self
+end
+
+-- table_keys_to_list({a = 1, b = 2}) -> {a, b}
+local function table_keys_to_list(tbl)
+    local ret = {}
+    for key, _ in pairs(tbl) do
+        table.insert(ret, key)
+    end
+    return ret
+end
+
+-- num_items_in_table({2, 4, 6}) -> 3
+local function num_items_in_table(tbl)
+    n = 0
+    for _ in pairs(tbl) do
+        n = n + 1
+    end
+    return n
+end
+
+-- element_is_in_table(2, {1, 3, 5}) -> false
+local function element_is_in_table(item, tbl)
+    for _, value in pairs(tbl) do
+        if value == item then
+            return true
+        end
+    end
+    return false
+end
+
+-- Stolen from http://lua-users.org/wiki/TableUtils
+function combinations(lst, n)
+    local a, number, select, newlist
+    newlist = {}
+    number = #lst
+    select = n
+    a = {}
+    for i=1,select do
+        a[#a+1] = i
+    end
+    newthing = {}
+    while(1) do
+        local newrow = {}
+        for i = 1,select do
+            newrow[#newrow + 1] = lst[a[i]]
+        end
+        newlist[#newlist + 1] = newrow
+        i=select
+        while(a[i] == (number - select + i)) do
+            i = i - 1
+        end
+        if(i < 1) then break end
+        a[i] = a[i] + 1
+        for j=i, select do
+            a[j] = a[i] + j - i
+        end
+    end
+    return newlist
+end
+
+
+local function get_discovered_traits(reagents)
+    -- compare reagents and find traits that would be discovered if these reagents was combined.
+    --
+    -- this is done by going through each non-discovered trait of each reagent, and see if other
+    -- reagents have the same trait (discovered or not.)
+    local discoveries = {}
+
+    -- seriously lua. get `continue`.
+    for _, r1 in pairs(reagents) do
+        for trait, discovered in pairs(r1.traits) do
+            if not discovered then
+                for _, r2 in pairs(reagents) do
+                    if r1 ~= r2 then
+                        if r2.traits[trait] ~= nil then
+                            table.insert(discoveries, {
+                                reagent = r1,
+                                trait = trait,
+                            })
+                            break
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    return discoveries
+end
+
+local function get_best_combination(inventory, max_reagents)
+    -- given a set of reagents (inventory), return the best possible combination, maximizing on
+    -- number of new discoveries.
+    --
+    -- "best possible" is not theoretically optimal, but it's good enough. A better way to do this
+    -- would be to implement a depth first search, that finds which combination of combinations yields
+    -- the most discoveries per reagent used, overall. But I'm not planning on implementing that;
+    -- the current algorithm is good enough.
+    if inventory:num_reagents() < 2 then
+        return
+    end
+
+    -- we score each combination to decide the best one. this scoring is done such that if we have
+    -- two combinations that gets 4 discoveries, we take the one that uses the least reagents.
+    -- that's about it.
+    local best_score = 0
+    local best_combination
+
+    local reagent_names = inventory:get_reagent_names()
+    local all_combinations = {}
+
+    for num_reagents = 2, max_reagents do
+        local combinations = combinations(reagent_names, num_reagents)
+        for _, combination in pairs(combinations) do
+            table.insert(all_combinations, combination)
+        end
+    end
+
+    for _, reagent_names in pairs(all_combinations) do
+        local reagents_combination = {}
+        for _, reagent_name in pairs(reagent_names) do
+            table.insert(reagents_combination, inventory:get_reagent(reagent_name))
+        end
+
+        local discoveries = get_discovered_traits(reagents_combination)
+
+        -- we subtract #reagent_names (number of reagents used) so we use the least amount of
+        -- reagents if different combinations yields the same number of discoveries.
+        local score = (#discoveries * 10) - #reagent_names
+        if score > best_score then
+            best_score = score
+            best_combination = {
+                reagents = reagents_combination,
+                discoveries = discoveries,
+            }
+        end
+    end
+
+    if best_combination and #best_combination.discoveries > 0 then
+        return best_combination
+    end
+end
+
+
+local function get_optimal_combinations(inventory, max_reagents)
+
+    -- returns a list of combinations that can be done in order, to maximize discovery of traits.
+    local ret = {}
+
+    local combination
+    repeat
+        --it breaks in here.
+        combination = get_best_combination(inventory, max_reagents)
+        if combination then
+            table.insert(ret, combination)
+            d("just loggin")
+            --
+            for _, reagent in pairs(combination.reagents) do
+                inventory:decrement_reagent_qty(reagent)
+            end
+
+            for _, discovery in pairs(combination.discoveries) do
+                discovery.reagent:discover(discovery.trait)
+            end
+        end
+    until not combination
+
+--
+    return ret
 end
 
 function Inventory:add_reagent(reagent_name, qty, known_traits, bag_id, slot_index)
@@ -156,7 +307,7 @@ function Inventory:add_reagent(reagent_name, qty, known_traits, bag_id, slot_ind
 
         -- key = trait name
         -- value = is discovered
-        traits[trait] = Batteries.element_is_in_table(trait, known_traits)
+        traits[trait] = element_is_in_table(trait, known_traits)
     end
 
     -- This check makes sure that the player didn't have some trait in his inventory that ISN'T in all_reagents.
@@ -167,11 +318,11 @@ function Inventory:add_reagent(reagent_name, qty, known_traits, bag_id, slot_ind
     
     assert(self.reagents[reagent_name] == nil, string.format("Tried to add '%s', but it's already added.", reagent_name))
 
-    local num_traits = Batteries.num_items_in_table(traits)
+    local num_traits = num_items_in_table(traits)
     assert(num_traits == 4, string.format("Found %d traits; something is wrong with the reagent '%s'.", num_traits, reagent_name))
 
-    self.reagents[reagent_name] = Reagent:new(reagent_name, qty, traits, bag_id, slot_index)
-    
+    self.reagents[reagent_name] = Alchemist.Reagent:new(reagent_name, qty, traits, bag_id, slot_index)
+--
     return self.reagents[reagent_name]
 end
 
@@ -193,7 +344,7 @@ function Inventory:num_reagents()
 end
 
 function Inventory:get_reagent_names()
-    return Batteries.table_keys_to_list(self.reagents)
+    return table_keys_to_list(self.reagents)
 end
 
 function Inventory:populate_from_control(control)
@@ -218,3 +369,4 @@ function Inventory:populate_from_control(control)
 end
 
 Alchemist.Inventory = Inventory
+Alchemist.Algorithm.get_optimal_combinations = get_optimal_combinations

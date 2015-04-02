@@ -1,5 +1,4 @@
---TODO why is everything suddenly global????
-SI = {}
+local SI = {}
 
 -- texts
 SI.NO_DISCOVERIES_AVAILABLE = "SI_ALCHEMIST_NO_DISCOVERIES_AVAILABLE"
