@@ -24,21 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Alchemist.lua" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Alchemist.lua" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Alchemist.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.642857" vertical-offset="426" max-vertical-offset="1980">
-              <caret line="42" column="46" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibLuminary.lua" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/LibLuminary.lua">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.59363955" vertical-offset="3861" max-vertical-offset="4710">
-              <caret line="291" column="57" selection-start-line="291" selection-start-column="57" selection-end-line="291" selection-end-column="57" />
+            <state vertical-scroll-proportion="0.38162544" vertical-offset="411" max-vertical-offset="1980">
+              <caret line="49" column="28" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -47,8 +37,28 @@
       <file leaf-file-name="Inventory.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Alchemist/Inventory.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4229" max-vertical-offset="5670">
-              <caret line="302" column="111" selection-start-line="302" selection-start-column="4" selection-end-line="302" selection-end-column="111" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="4259" max-vertical-offset="6030">
+              <caret line="304" column="42" selection-start-line="304" selection-start-column="42" selection-end-line="304" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Reagent.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Alchemist/Reagent.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SI.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Alchemist/SI.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="1005">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -59,14 +69,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Alchemist/Batteries.lua" />
-        <option value="$PROJECT_DIR$/Alchemist/Inventory.lua" />
         <option value="$PROJECT_DIR$/Alchemist/Algorithm.lua" />
         <option value="$PROJECT_DIR$/lib/Unicorn/Unicorn.lua" />
         <option value="$PROJECT_DIR$/lib/Unicorn/Unicorn/List.lua" />
         <option value="$PROJECT_DIR$/Alchemist.txt" />
-        <option value="$PROJECT_DIR$/Alchemist.lua" />
         <option value="$PROJECT_DIR$/lib/LibLuminary.lua" />
+        <option value="$PROJECT_DIR$/Alchemist/Batteries.lua" />
+        <option value="$PROJECT_DIR$/Alchemist/Reagent.lua" />
+        <option value="$PROJECT_DIR$/Alchemist/Inventory.lua" />
+        <option value="$PROJECT_DIR$/Alchemist.lua" />
       </list>
     </option>
   </component>
@@ -351,7 +362,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1680" height="969" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -400,39 +411,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Alchemist/Batteries.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1050">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/LibStub.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="849">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Alchemist/Inventory.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4229" max-vertical-offset="5670">
-          <caret line="302" column="111" selection-start-line="302" selection-start-column="4" selection-end-line="302" selection-end-column="111" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Alchemist/Algorithm.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="851">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Alchemist/Reagent.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="849">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -456,18 +435,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Alchemist.lua">
+    <entry file="file://$PROJECT_DIR$/lib/LibLuminary.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.642857" vertical-offset="426" max-vertical-offset="1980">
-          <caret line="42" column="46" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="46" />
+        <state vertical-scroll-proportion="-1.819788" vertical-offset="1725" max-vertical-offset="4695">
+          <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/LibLuminary.lua">
+    <entry file="file://$PROJECT_DIR$/Alchemist/Reagent.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59363955" vertical-offset="3861" max-vertical-offset="4710">
-          <caret line="291" column="57" selection-start-line="291" selection-start-column="57" selection-end-line="291" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="849">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Alchemist/SI.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="156" max-vertical-offset="1005">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Alchemist/Inventory.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4259" max-vertical-offset="6030">
+          <caret line="304" column="42" selection-start-line="304" selection-start-column="42" selection-end-line="304" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Alchemist.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38162544" vertical-offset="411" max-vertical-offset="1980">
+          <caret line="49" column="28" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
           <folding />
         </state>
       </provider>

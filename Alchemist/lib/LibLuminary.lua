@@ -10,17 +10,17 @@ local ListView = {}
 
 --- just because I do this frequently... lol
 function LibLuminary:new(config)
-    assert(1 ~= 1, "You need to use New not lowercase new")
+    assert(1 ~= 1, "You need to use function New not lowercase new")
 end
 
 --- just because I do this frequently... lol
 function LibLuminary:init(config)
-    assert(1 ~= 1, "You need to use New not lowercase init")
+    assert(1 ~= 1, "You need to use function New not lowercase init")
 end
 
 
 function LibLuminary:New(config)
-    local settings = config.settings
+    local settings = config
     self.config = config.config or {}
     self.config.width = config.width or 300
     self.config.height = config.height or 50
@@ -193,11 +193,10 @@ function LibLuminary:initialize_listview(width, height, left, top)
 
     -- title
     if self.title then
-        d(self.title)
         control.title = self.wm:CreateControl(name .. "_Title", control, CT_LABEL)
         control.title:SetFont("ZoFontGame")
         control.title:SetColor(255, 255, 255, 1)
-        control.title:SetText(" Hello" .. self.title)
+        control.title:SetText("  " .. self.title)
         control.title:SetHeight(self.TITLE_HEIGHT)
         control.title:SetAnchor(TOPLEFT, control, TOPLEFT, 0, 0)
         control.title:SetAnchor(TOPRIGHT, control, TOPRIGHT, 0, 0)

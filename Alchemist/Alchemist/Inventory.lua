@@ -154,7 +154,7 @@ local function element_is_in_table(item, tbl)
 end
 
 -- Stolen from http://lua-users.org/wiki/TableUtils
-function combinations(lst, n)
+local function combinations(lst, n)
     local a, number, select, newlist
     newlist = {}
     number = #lst
@@ -163,14 +163,15 @@ function combinations(lst, n)
     for i=1,select do
         a[#a+1] = i
     end
-    newthing = {}
     while(1) do
         local newrow = {}
         for i = 1,select do
             newrow[#newrow + 1] = lst[a[i]]
         end
         newlist[#newlist + 1] = newrow
-        i=select
+        -- Fuck you and your fucking face i.
+        -- Never allow 'i' to be global on accedent, the fucking app will break everyones keyboard.
+       local  i=select
         while(a[i] == (number - select + i)) do
             i = i - 1
         end
@@ -182,6 +183,30 @@ function combinations(lst, n)
     end
     return newlist
 end
+
+
+
+local Reagent = {}
+
+function Reagent:new(name, qty, traits, bag_id, slot_index)
+    self = {
+        name = name,
+        qty = qty,
+        traits = traits,
+        bag_id = bag_id,
+        slot_index = slot_index,
+    }
+    setmetatable(self, {__index = Reagent})
+
+    return self
+end
+
+
+function Reagent:discover(trait)
+    assert(self.traits[trait] == false)
+    self.traits[trait] = true
+end
+
 
 
 local function get_discovered_traits(reagents)
@@ -278,7 +303,6 @@ local function get_optimal_combinations(inventory, max_reagents)
         combination = get_best_combination(inventory, max_reagents)
         if combination then
             table.insert(ret, combination)
-            d("just loggin")
             --
             for _, reagent in pairs(combination.reagents) do
                 inventory:decrement_reagent_qty(reagent)
@@ -321,7 +345,7 @@ function Inventory:add_reagent(reagent_name, qty, known_traits, bag_id, slot_ind
     local num_traits = num_items_in_table(traits)
     assert(num_traits == 4, string.format("Found %d traits; something is wrong with the reagent '%s'.", num_traits, reagent_name))
 
-    self.reagents[reagent_name] = Alchemist.Reagent:new(reagent_name, qty, traits, bag_id, slot_index)
+    self.reagents[reagent_name] = Reagent:new(reagent_name, qty, traits, bag_id, slot_index)
 --
     return self.reagents[reagent_name]
 end
