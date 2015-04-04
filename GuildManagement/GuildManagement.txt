@@ -1,0 +1,29 @@
+## Title: GuildManagement
+
+## APIVersion: 100011
+## Author: @Awesomebilly
+## Version: 165.0
+
+
+## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibLuminary.lua
+## SavedVariables: alchemist_sv
+
+libs/LibStub.lua
+libs/LibLuminary.lua
+libs/LibAddonMenu-2.0.lua
+
+## GuildManager
+GuildManager.xml
+GuildManager.lua
+
+GuildManager/SI.lua
+libs/localization/$(language).lua
+
+
+; @Awesomebilly - North America.
+; DISCLOSURE:
+; This Add-on is not created by, affiliated with or sponsored by ZeniMax
+; Media Inc. or its affiliates. The Elder Scrolls? and related logos are
+; registered trademarks or trademarks of ZeniMax Media Inc. in the United
+; States and/or other countries. All rights reserved.
+; You can read the full terms at https://account.elderscrollsonline.com/add-on-terms

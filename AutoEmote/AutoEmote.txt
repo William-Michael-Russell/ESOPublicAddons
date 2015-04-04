@@ -1,0 +1,13 @@
+## Title: AutoEmote
+## Author:  mtn: @awesomebilly Original Author: Tajin
+## Version: 1.3
+## APIVersion: 100011
+## SavedVariables: AutoEmoteSaved
+
+
+AutoEmoteFilter.lua
+AutoEmote.lua
+AutoEmote.xml
+
+
+;Please see license
