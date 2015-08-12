@@ -79,14 +79,16 @@ local function TempDisableAlerts()
     zo_callLater(function() ReEnableAlertS() end, 1500)
 end
 
-local function FishMeNow(bagId, slotId, isNewItem, itemSoundCategory, updateReason)
+local function FishMeNow(eventId, bagId, slotId, isNewItem, itemSoundCategory, updateReason)
+    if itemSoundCategory ~= ITEM_SOUND_CATEGORY_LURE then return end
+    if bagId ~= BAG_BACKPACK then return end
     if SavedVars.Enable_Reel_Alerts then -- allow user to disable reel in alerts.
         local action, name = GetGameCameraInteractableActionInfo()
         if action == GetString(SI_GAMECAMERAACTIONTYPE17) and name == SI.get(SI.FISHINGHOLE) then
             if not Config.tempDisableAlerts then
                 if Config.allowAlert then
                     if not SCENE_MANAGER:IsInUIMode() then
-                        if not itemSoundCategory then
+                        if not isNewItem then
                             CENTER_SCREEN_ANNOUNCE:AddMessage(0, CSA_EVENT_LARGE_TEXT, SOUNDS.BOOK_ACQUIRED, SI.get(SI.REELIN))
                             --d(SI.get(SI.REELIN))
                         end
